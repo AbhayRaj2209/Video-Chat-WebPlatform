@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Chat - Room</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script>
+      const ROOM_ID = "<%= roomId %>";
+    </script>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <div class="header-left">
+          <a href="/" class="header__back" title="Back to Home">
+            <i class="fas fa-home"></i>
+          </a>
+          <div class="logo">
+            <i class="fas fa-video"></i>
+            <h3>Video Chat</h3>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="room-info">
+            <span class="room-label">Room ID:</span>
+            <span class="room-id" id="roomIdDisplay"><%= roomId %></span>
+            <button class="copy-btn" id="copyRoomId" title="Copy Room ID">
+              <i class="fas fa-copy"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>  
+    <div class="main">  
+      <div class="main__left">
+        <div class="videos__group">
+          <div id="video-grid"></div>
+          <div class="empty-state" id="emptyState">
+            <i class="fas fa-users"></i>
+            <p>Waiting for others to join...</p>
+          </div>
+        </div>
+        <div class="options">
+          <div class="options__center">
+            <div class="control-group">
+              <button id="muteButton" class="options__button control-btn" title="Mute/Unmute Microphone">
+                <i class="fas fa-microphone"></i>
+                <span class="control-label">Mic</span>
+              </button>
+              <button id="stopVideo" class="options__button control-btn" title="Turn On/Off Camera">
+                <i class="fas fa-video"></i>
+                <span class="control-label">Video</span>
+              </button>
+              <button id="showChat" class="options__button control-btn chat-toggle" title="Show/Hide Chat">
+                <i class="fas fa-comment"></i>
+                <span class="control-label">Chat</span>
+              </button>
+              <button id="inviteButton" class="options__button control-btn invite-btn" title="Invite Others">
+                <i class="fas fa-user-plus"></i>
+                <span class="control-label">Invite</span>
+              </button>
+              <button id="leaveButton" class="options__button control-btn leave-btn" title="Leave Meeting">
+                <i class="fas fa-phone-slash"></i>
+                <span class="control-label">Leave</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main__right" id="chatPanel">
+        <div class="chat-header">
+          <h4><i class="fas fa-comments"></i> Chat</h4>
+          <button class="close-chat" id="closeChat" title="Close Chat">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="main__chat_window">
+          <div class="messages" id="messages"></div>
+        </div>
+        <div class="main__message_container">
+          <input id="chat_message" type="text" autocomplete="off" placeholder="Type a message...">
+          <button id="send" class="send-btn" title="Send Message">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="user-name-modal" id="userNameModal">
+      <div class="modal-content">
+        <h3>Join Meeting</h3>
+        <p>Enter your name to continue</p>
+        <input type="text" id="userNameInput" placeholder="Your name" maxlength="20">
+        <div class="modal-buttons">
+          <button id="joinMeeting" class="btn-primary">Join</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="script.js"></script>
+</html>
